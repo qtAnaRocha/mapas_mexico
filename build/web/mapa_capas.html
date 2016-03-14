@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
+        <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+        <!--Agregamos la libreria de OpenLayersde la ruta http://www.openlayers.org/api/OpenLayers.js-->
+        <script type="text/javascript">
+           var mapa, capa;
+           
+           function init(){
+               mapa = new OpenLayers.Map('mapa'); //creamos el mapa
+               capa = new OpenLayers.Layer.WMS( "Mapa Base", //creamos una capa
+        	     "http://vmap0.tiles.osgeo.org/wms/vmap0?",
+        	     {layers: 'basic', projection: 'EPSG:4230'} );               
+               
+               var capa_mex0= new OpenLayers.Layer.WMS(
+                      'mex_adm0',                      
+                      'http://localhost:8085/geoserver/mapas_mexico/wms',
+                      {
+                        'layers':'espacio_prueba:mex_adm0',
+                        'format':'image/png','transparent':'true'
+                        },
+                      {
+                          'isBaseLayer':false,
+                          'opacity':1.0,
+                          'visibility':true                          
+                      }
+            );
+            var capa_mex1= new OpenLayers.Layer.WMS(
+                      'mex_adm1',
+                      'http://localhost:8085/geoserver/mapas_mexico/wms',
+                      {
+                        'layers':'espacio_prueba:mex_adm1',
+                        'format':'image/png','transparent':'true'
+                        },
+                      {
+                          'isBaseLayer':false,
+                          'opacity':1.0,
+                          'visibility':true                          
+                      }
+            );
+            var capa_mex2= new OpenLayers.Layer.WMS(
+                      'mex_adm2',
+                      'http://localhost:8085/geoserver/mapas_mexico/wms',
+                      {
+                        'layers':'espacio_prueba:mex_adm2',
+                        'format':'image/png','transparent':'true'
+                        },
+                      {
+                          'isBaseLayer':false,
+                          'opacity':1.0,
+                          'visibility':true                          
+                      }
+            );
+               
+              //mapa.addLayer(capa);//agregamos la capa al mapa    
+               mapa.addLayers([capa,capa_mex0,capa_mex1,capa_mex2]);
+               mapa.zoomToMaxExtent();//fijar la posición del centro del mapa y el nivel de zoom inicial
+            }            
+        </script>
+    </head>
+    <body onload="init()">        
+        <div id="mapa" style="width: 1200px; height: 600px;"></div>
+    </body>
+</html>

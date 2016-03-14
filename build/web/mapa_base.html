@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
+        <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+        <!--Agregamos la libreria de OpenLayersde la ruta http://www.openlayers.org/api/OpenLayers.js-->
+        <script type="text/javascript">
+           var mapa, capa;
+           
+           function init(){
+               mapa = new OpenLayers.Map('mapa'); //mapa que se mostrará en pantalla con la referencia al objeto div "mapa"
+               capa = new OpenLayers.Layer.WMS( "Mapa Base", //capa que contiene el mapa base de fondo del Web Map Services osgeo 
+        	     "http://vmap0.tiles.osgeo.org/wms/vmap0?",
+        	     {layers: 'basic', projection: 'EPSG:4230'} );
+               mapa.addLayer(capa);
+               mapa.zoomToMaxExtent();
+            }            
+        </script>
+    </head>
+    <body onload="init()">        
+        <div id="mapa" style="width: 1200px; height: 600px;"></div>
+    </body>
+</html>
